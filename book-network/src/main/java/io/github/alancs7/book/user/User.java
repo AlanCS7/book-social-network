@@ -25,6 +25,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
@@ -32,6 +33,7 @@ import lombok.Setter;
 @Builder
 @Entity
 @Table(name = "_user")
+@NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class User implements UserDetails, Principal {
