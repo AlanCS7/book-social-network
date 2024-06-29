@@ -42,13 +42,13 @@ public class JwtFilter extends OncePerRequestFilter {
                     authenticateUser(request, userDetails);
                 }
             }
-
-            filterChain.doFilter(request, response);
         }
+
+        filterChain.doFilter(request, response);
     }
 
     private boolean isAuthHeaderValid(HttpServletRequest request, String authHeader) {
-        return request.getServletPath().contains("/api/v1/auth") || authHeader == null || !authHeader.startsWith("Bearer ");
+        return !(request.getServletPath().contains("/api/v1/auth") || authHeader == null || !authHeader.startsWith("Bearer "));
     }
 
     private void authenticateUser(HttpServletRequest request, UserDetails userDetails) {
