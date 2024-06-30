@@ -3,6 +3,7 @@ package io.github.alancs7.book.auth;
 import io.github.alancs7.book.email.EmailService;
 import io.github.alancs7.book.email.EmailTemplateName;
 import io.github.alancs7.book.exception.RoleNotFoundException;
+import io.github.alancs7.book.exception.TokenException;
 import io.github.alancs7.book.role.RoleRepository;
 import io.github.alancs7.book.security.JwtService;
 import io.github.alancs7.book.user.Token;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -111,5 +113,24 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(claims, user);
 
         return AuthenticateResponse.builder().token(jwtToken).build();
+    }
+
+
+    public void activateAccount(String token) throws MessagingException {
+        var savedToken = tokenRepository.findByToken(token)
+                .orElseThrow(() -> new TokenException("Invalid token"));
+
+        if (LocalDateTime.now().isAfter(savedToken.getExpiresAt())) {
+            sendValidationEmail(savedToken.getUser());
+            throw new TokenException("Activation token has expired. A new one has been sent to your email");
+        }
+
+        var user = userRepository.findById(savedToken.getUser().getId())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        user.setEnabled(true);
+        userRepository.save(user);
+
+        savedToken.setValidatedAt(LocalDateTime.now());
+        tokenRepository.save(savedToken);
     }
 }
