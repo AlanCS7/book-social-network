@@ -1,4 +1,4 @@
-package io.github.alancs7.book.book;
+package io.github.alancs7.book.feedback;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedBy;
@@ -11,18 +11,13 @@ import java.time.LocalDateTime;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Book {
+public class Feedback {
 
     @Id
     @GeneratedValue
     private Long id;
-    private String title;
-    private String authorName;
-    private String isbn;
-    private String synopsis;
-    private String bookCover;
-    private boolean archived;
-    private boolean shareable;
+    private Double vote;
+    private String comment;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
