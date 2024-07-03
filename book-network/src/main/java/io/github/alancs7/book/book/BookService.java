@@ -1,5 +1,6 @@
 package io.github.alancs7.book.book;
 
+import io.github.alancs7.book.exception.BookNotFoundException;
 import io.github.alancs7.book.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -17,5 +18,11 @@ public class BookService {
         Book book = bookMapper.toBook(request);
         book.setOwner(user);
         return bookRepository.save(book).getId();
+    }
+
+    public BookResponse findById(Long bookId) {
+        return bookRepository.findById(bookId)
+                .map(bookMapper::toBookResponse)
+                .orElseThrow(() -> new BookNotFoundException("No book found with the ID:: " + bookId));
     }
 }
