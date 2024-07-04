@@ -2,6 +2,8 @@ package io.github.alancs7.book.book;
 
 import io.github.alancs7.book.common.PageResponse;
 import io.github.alancs7.book.exception.BookNotFoundException;
+import io.github.alancs7.book.history.BookTransactionHistory;
+import io.github.alancs7.book.history.BookTransactionHistoryRepository;
 import io.github.alancs7.book.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,7 @@ import static io.github.alancs7.book.book.BookSpecification.withOwnerId;
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final BookTransactionHistoryRepository transactionHistoryRepository;
     private final BookMapper bookMapper;
 
     public Long save(BookRequest request, Authentication connectedUser) {
@@ -70,6 +73,24 @@ public class BookService {
                 books.getTotalPages(),
                 books.isFirst(),
                 books.isLast()
+        );
+    }
+
+    public PageResponse<BorrowedBookResponse> findAllBorrowedBooks(int page, int size, Authentication connectedUser) {
+        User user = (User) connectedUser.getPrincipal();
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
+        Page<BookTransactionHistory> allBorrowedBooks = transactionHistoryRepository.findAllBorrowedBooks(pageable, user.getId());
+        List<BorrowedBookResponse> bookResponses = allBorrowedBooks.stream()
+                .map(bookMapper::toBorrowedBookResponse)
+                .toList();
+        return new PageResponse<>(
+                bookResponses,
+                allBorrowedBooks.getNumber(),
+                allBorrowedBooks.getSize(),
+                allBorrowedBooks.getTotalElements(),
+                allBorrowedBooks.getTotalPages(),
+                allBorrowedBooks.isFirst(),
+                allBorrowedBooks.isLast()
         );
     }
 }
