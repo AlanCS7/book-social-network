@@ -62,4 +62,12 @@ public class BookController {
     ) {
         return ResponseEntity.ok(service.findAllReturnedBooks(page, size, connectedUser));
     }
+
+    @PatchMapping("/shareable/{book-id}")
+    public ResponseEntity<Long> updateShareableStatus(
+            @PathVariable("book-id") Long bookId,
+            Authentication connectedUser
+    ) {
+        return ResponseEntity.ok(service.updateShareableStatus(bookId, connectedUser));
+    }
 }

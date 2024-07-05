@@ -2,6 +2,7 @@ package io.github.alancs7.book.book;
 
 import io.github.alancs7.book.common.PageResponse;
 import io.github.alancs7.book.exception.BookNotFoundException;
+import io.github.alancs7.book.exception.OperationNotPermittedException;
 import io.github.alancs7.book.history.BookTransactionHistory;
 import io.github.alancs7.book.history.BookTransactionHistoryRepository;
 import io.github.alancs7.book.user.User;
@@ -14,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 import static io.github.alancs7.book.book.BookSpecification.withOwnerId;
 
@@ -110,5 +112,19 @@ public class BookService {
                 allBorrowedBooks.isFirst(),
                 allBorrowedBooks.isLast()
         );
+    }
+
+    public Long updateShareableStatus(Long bookId, Authentication connectedUser) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new BookNotFoundException("No book found with the ID:: " + bookId));
+        User user = (User) connectedUser.getPrincipal();
+
+        if (!Objects.equals(book.getOwner().getId(), user.getId())) {
+            throw new OperationNotPermittedException("You can only update shareable status of your own books");
+        }
+
+        book.setShareable(!book.isShareable());
+        bookRepository.save(book);
+        return bookId;
     }
 }
