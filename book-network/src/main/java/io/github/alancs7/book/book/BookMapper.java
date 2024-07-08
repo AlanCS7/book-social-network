@@ -1,5 +1,6 @@
 package io.github.alancs7.book.book;
 
+import io.github.alancs7.book.file.FileUtils;
 import io.github.alancs7.book.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 
@@ -26,13 +27,11 @@ public class BookMapper {
                 .isbn(book.getIsbn())
                 .synopsis(book.getSynopsis())
                 .owner(book.getOwner().getFullName())
-                // TODO implement cover
-                // .cover()
+                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
                 .rate(book.getRate())
                 .archived(book.isArchived())
                 .shareable(book.isShareable())
                 .build();
-
     }
 
     public BorrowedBookResponse toBorrowedBookResponse(BookTransactionHistory history) {
