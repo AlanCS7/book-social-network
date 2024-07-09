@@ -37,7 +37,7 @@ public class FileStorageService {
             @Nonnull String fileUploadSubPath
     ) {
         final String finalUploadPath = fileUploadPath + separator + fileUploadSubPath;
-        File targetFolder = new File(fileUploadPath);
+        File targetFolder = new File(finalUploadPath);
 
         if (!targetFolder.exists()) {
             boolean folderCreated = targetFolder.mkdirs();
