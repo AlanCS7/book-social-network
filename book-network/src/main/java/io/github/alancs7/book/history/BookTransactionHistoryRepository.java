@@ -30,7 +30,7 @@ public interface BookTransactionHistoryRepository extends JpaRepository<BookTran
             (COUNT(*) > 0) AS isBorrowed
             FROM BookTransactionHistory bookTransactionHistory
             WHERE bookTransactionHistory.user.id = :userId
-            AND bookTransactionHistory.book.id = :boodId
+            AND bookTransactionHistory.book.id = :bookId
             AND bookTransactionHistory.returnApproved = false
             """)
     boolean isAlreadyBorrowedByUser(Long bookId, Long userId);
@@ -53,5 +53,5 @@ public interface BookTransactionHistoryRepository extends JpaRepository<BookTran
             AND history.returned = true
             AND history.returnApproved = false
             """)
-    Optional<BookTransactionHistory> findByBookIdAndOwnerId(Long bookId, Long id);
+    Optional<BookTransactionHistory> findByBookIdAndOwnerId(Long bookId, Long userId);
 }
