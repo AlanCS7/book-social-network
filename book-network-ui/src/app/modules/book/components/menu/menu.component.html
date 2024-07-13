@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+  <div class="container-fluid ms-3 me-3 text-uppercase">
+    <a class="navbar-brand fs-6" routerLink="/books">Home</a>
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler" data-bs-target="#navbarSupportedContent"
+            data-bs-toggle="collapse" type="button"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-brand navbar-nav me-auto mb-2 mb-lg-0 fs-6">
+        <li class="nav-item">
+          <a aria-current="page" class="nav-link" routerLink="my-books">
+            My books
+          </a>
+        </li>
+        <li class="nav-item">
+          <a aria-current="page" class="nav-link" routerLink="my-waiting-list">
+            My waiting list
+          </a>
+        </li>
+        <li class="nav-item">
+          <a aria-current="page" class="nav-link" routerLink="my-returned-books">
+            My returned books
+          </a>
+        </li>
+        <li class="nav-item">
+          <a aria-current="page" class="nav-link" routerLink="borrowed-books">
+            Borrowed books
+          </a>
+        </li>
+      </ul>
+      <form class="d-flex gap-2 align-items-center" role="search">
+        <input aria-label="Search" class="form-control" placeholder="FInd a book" type="text">
+        <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
+        <span class="text-capitalize">Welcome<strong>&nbsp;alan</strong></span>
+        <button (click)="logout()" class="btn btn-link" type="button">
+          <i class="fa-solid fa-right-from-bracket" style="color: #FFFFFF8C;"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>
