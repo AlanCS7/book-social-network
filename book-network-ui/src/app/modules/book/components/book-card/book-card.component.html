@@ -17,8 +17,8 @@
       </span>
     </div>
     <div *ngIf="!manage" class="d-flex gap-2">
-      <i (click)="onShowDetails()" class="fas fa-circle-info text-primary"></i>
-      <i (click)="onBorrow()" class="fas fa-list-check text-primary"></i>
+      <i (click)="onShowDetails()" class="fas fa-circle-info text-secondary"></i>
+      <i (click)="onBorrow()" class="fas fa-list-check text-success"></i>
       <i (click)="onAddToWaitingList()" class="fas fa-heart text-danger"></i>
     </div>
     <div *ngIf="manage" class="d-flex gap-2">

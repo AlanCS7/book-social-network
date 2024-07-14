@@ -11,6 +11,14 @@ li > a {
   }
 }
 
+.container-fluid {
+  max-width: 1600px;
+}
+
+.fs-nav {
+  font-size: 14px;
+}
+
 form {
   input.form-control {
     &:focus {

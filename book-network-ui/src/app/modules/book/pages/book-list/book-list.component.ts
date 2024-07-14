@@ -10,8 +10,8 @@ import { PageResponseBookResponse } from "../../../../services/models/page-respo
 })
 export class BookListComponent implements OnInit {
   bookResponse: PageResponseBookResponse = {};
-  private page: number = 0;
-  private size: number = 10;
+  protected page: number = 0;
+  private size: number = 4;
 
   constructor(
     private bookService: BookService,
@@ -20,6 +20,31 @@ export class BookListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.findAllBooks();
+  }
+
+  goToFirstPage() {
+    this.page = 0;
+    this.findAllBooks();
+  }
+
+  goToPreviousPage() {
+    this.page--;
+    this.findAllBooks();
+  }
+
+  goToPage(page: number) {
+    this.page = page;
+    this.findAllBooks();
+  }
+
+  goToNextPage() {
+    this.page++;
+    this.findAllBooks();
+  }
+
+  goToLastPage() {
+    this.page = this.bookResponse.totalPages as number - 1;
     this.findAllBooks();
   }
 
