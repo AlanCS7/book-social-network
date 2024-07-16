@@ -1,10 +1,19 @@
 div {
   &.card {
-    max-height: 580px;
-    min-height: 580px;
+    max-height: 460px;
+    min-height: 460px;
   }
 }
 
 i {
   cursor: pointer;
+}
+
+.position-relative:hover .position-absolute {
+  opacity: 1 !important;
+}
+
+.synopsis-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }

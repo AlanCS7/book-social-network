@@ -1,13 +1,17 @@
 <div class="card">
-  <img [src]="bookCover" alt="..." class="card-img-top" height="275">
+  <div class="position-relative">
+    <img [src]="bookCover" alt="..." class="card-img-top" height="300">
+    <div
+      class="synopsis-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-75 text-white opacity-0">
+      <p class="m-3 text-center">{{ book.synopsis }}</p>
+    </div>
+  </div>
   <div class="card-body overflow-auto">
     <h5 class="card-title fs-6 fw-bold mb-1"><i class="fa-solid fa-book"></i>&nbsp;{{ book.title }}</h5>
     <h5 class="card-subtitle fs-6 text-secondary mb-1"><i class="fa-solid fa-user-check"></i>&nbsp;{{ book.authorName }}
     </h5>
     <h6 class="card-subtitle fs-6 text-secondary mb-1"><i class="fas fa-code"></i>&nbsp;{{ book.isbn }}</h6>
     <h6 class="card-subtitle fs-6 text-secondary"><i class="fas fa-user"></i>&nbsp;{{ book.owner }}</h6>
-    <hr>
-    <p class="card-text">{{ book.synopsis }}</p>
   </div>
   <div class="card-footer d-flex gap-2 justify-content-between align-items-center">
     <div class="d-flex gap-2">
