@@ -1,18 +1,18 @@
 <h3 class="text-center mt-2 text-uppercase">Books list</h3>
-<div
-  *ngIf="message"
-  [class.alert-danger]="level === 'error'"
-  [class.alert-success]="level === 'success'"
-  class="alert container"
->
-  <i
-    [class.fa-circle-check]="level === 'success'"
-    [class.fa-circle-exclamation]="level === 'error'"
-    class="fa-solid"></i>&nbsp;{{ message }}
-</div>
 <hr>
 
 <div class="container">
+  <div
+    *ngIf="message"
+    [class.alert-danger]="level === 'error'"
+    [class.alert-success]="level === 'success'"
+    class="alert"
+  >
+    <i
+      [class.fa-circle-check]="level === 'success'"
+      [class.fa-circle-exclamation]="level === 'error'"
+      class="fa-solid"></i>&nbsp;{{ message }}
+  </div>
   <div class="row">
     <div *ngFor="let book of bookResponse.content" class="col-md-4 col-lg-3 mb-3">
       <app-book-card
