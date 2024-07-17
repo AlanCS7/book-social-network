@@ -42,7 +42,7 @@ export class BookCardComponent {
     if (this._book.cover) {
       return 'data:image/jpg;base64, ' + this._book.cover;
     }
-    return 'https://picsum.photos/300/300';
+    return 'https://picsum.photos/300/350';
   }
 
   onShowDetails() {
