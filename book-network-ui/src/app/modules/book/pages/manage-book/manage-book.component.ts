@@ -38,11 +38,20 @@ export class ManageBookComponent implements OnInit {
             shareable: book.shareable
           }
           if (book.cover) {
-            this.selectedPicture = 'data:image/jpg;base64,' + book.cover;
+            this.loadExistingCover('data:image/jpg;base64,' + book.cover);
           }
         }
       })
     }
+  }
+
+  loadExistingCover(bookCover: string): void {
+    this.selectedPicture = bookCover;
+    fetch(bookCover)
+      .then(res => res.blob())
+      .then(blob => {
+        this.selectedBookCover = new File([blob], 'book-cover.jpg', { type: 'image/*' });
+      });
   }
 
   onFileSelected(event: any) {

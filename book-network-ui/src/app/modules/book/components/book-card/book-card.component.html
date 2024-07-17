@@ -1,4 +1,8 @@
-<div class="card">
+<div
+  [class.border-success]="book.shareable"
+  [class.border-warning]="book.archived"
+  class="card border-2"
+>
   <div class="position-relative">
     <img [src]="bookCover" alt="..." class="card-img-top" height="300">
     <div
