@@ -1,0 +1,116 @@
+<h3 class="text-center mt-2 text-uppercase">My returned books</h3>
+<hr>
+
+<div class="container">
+  <div
+    *ngIf="message"
+    [class.alert-danger]="level === 'error'"
+    [class.alert-success]="level === 'success'"
+    class="alert"
+  >
+    <i
+      [class.fa-circle-check]="level === 'success'"
+      [class.fa-circle-exclamation]="level === 'error'"
+      class="fa-solid"></i>&nbsp;{{ message }}
+  </div>
+</div>
+<div class="container">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Rate</th>
+      <th scope="col"><i class="fas fa-cogs"></i></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let book of returnedBooks.content; let index = index">
+      <th scope="row">{{ index + 1 }}</th>
+      <td>{{ book.title }}</td>
+      <td>{{ book.authorName }}</td>
+      <td>{{ book.isbn }}</td>
+      <td><i class="fas fa-star text-warning"></i>&nbsp;{{ book.rate }}</td>
+      <td>
+        <div class="d-flex gap-2">
+          <i
+            *ngIf="book.returned"
+            class="fa-regular fa-paper-plane text-primary cursor-pointer"
+          ></i>
+          <i
+            *ngIf="!book.returned"
+            class="fa-solid fa-paper-plane text-success cursor-pointer"
+          ></i>
+          <i
+            (click)="approveBookReturn(book)"
+            [class.text-success]="book.returnApproved"
+            class="fa-solid fa-circle-check cursor-pointer"
+          ></i>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center mt-1">
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item">
+          <a
+            (click)="goToFirstPage()"
+            [class.disabled]="returnedBooks.first"
+            aria-label="Previous"
+            class="page-link text-secondary"
+            href="javascript:void(0)"
+          >
+            <i class="fa-solid fa-angles-left"></i>
+          </a>
+        </li>
+        <li class="page-item">
+          <a
+            (click)="goToPreviousPage()"
+            [class.disabled]="returnedBooks.first"
+            aria-label="Previous"
+            class="page-link text-secondary"
+            href="javascript:void(0)"
+          >
+            <i class="fa-solid fa-angle-left"></i>
+          </a>
+        </li>
+        <li *ngFor="let _ of [].constructor(this.returnedBooks.totalPages); let pageIndex = index" class="page-item">
+          <a
+            (click)="goToPage(pageIndex)"
+            [class.active]="page == pageIndex"
+            aria-label="Previous"
+            class="page-link text-secondary"
+            href="javascript:void(0)"
+          >
+            {{ pageIndex + 1 }}
+          </a>
+        <li class="page-item">
+          <a
+            (click)="goToNextPage()"
+            [class.disabled]="returnedBooks.last"
+            aria-label="Next"
+            class="page-link text-secondary"
+            href="javascript:void(0)"
+          >
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </li>
+        <li class="page-item">
+          <a
+            (click)="goToLastPage()"
+            [class.disabled]="returnedBooks.last"
+            aria-label="Next"
+            class="page-link text-secondary"
+            href="javascript:void(0)"
+          >
+            <i class="fa-solid fa-angles-right"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

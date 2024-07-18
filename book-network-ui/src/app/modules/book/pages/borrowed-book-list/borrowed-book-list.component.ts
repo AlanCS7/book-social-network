@@ -67,6 +67,7 @@ export class BorrowedBookListComponent implements OnInit {
           this.giveFeedback();
         }
         this.selectedBook = undefined;
+        this.findAllBorrowedBooks();
       }
     })
   }
