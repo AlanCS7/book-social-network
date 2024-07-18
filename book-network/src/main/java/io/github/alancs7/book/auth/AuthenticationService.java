@@ -64,7 +64,7 @@ public class AuthenticationService {
                 user.getEmail(),
                 user.getFullName(),
                 EmailTemplateName.ACTIVATE_ACCOUNT,
-                activationUrl,
+                activationUrl + newToken,
                 newToken,
                 "Account activation"
         );
