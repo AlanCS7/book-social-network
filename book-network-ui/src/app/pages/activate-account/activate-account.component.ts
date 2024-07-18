@@ -21,9 +21,7 @@ export class ActivateAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.activatedRoute)
     const token = this.activatedRoute.snapshot.queryParams['token'];
-    console.log(token)
     if (token) {
       this.confirmAccount(token);
     }

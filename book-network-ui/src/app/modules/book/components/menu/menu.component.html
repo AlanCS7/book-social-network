@@ -33,7 +33,7 @@
       <form class="d-flex gap-2 align-items-center" role="search">
         <input aria-label="Search" class="form-control" placeholder="FInd a book" type="text">
         <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
-        <span class="text-capitalize">Welcome<strong>&nbsp;alan</strong></span>
+        <span class="text-capitalize">Welcome<strong>&nbsp;{{ getName() }}</strong></span>
         <button (click)="logout()" class="btn btn-link" type="button">
           <i class="fa-solid fa-right-from-bracket" style="color: #FFFFFF8C;"></i>
         </button>

@@ -6,6 +6,15 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 })
 export class TokenService {
 
+  get name() {
+    const token = this.token;
+    if (!token) {
+      return '';
+    }
+    const jwtHelper = new JwtHelperService();
+    return jwtHelper.decodeToken(token).fullName.split(' ')[0];
+  }
+
   get token() {
     return localStorage.getItem('token') as string;
   }
