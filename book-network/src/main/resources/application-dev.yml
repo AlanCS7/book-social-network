@@ -14,10 +14,10 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   mail:
-    host: localhost
-    port: 1025
-    username: user
-    password: user
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: username
+    password: username
     properties:
       mail:
         smtp:
@@ -36,7 +36,10 @@ application:
       expiration: 8640000
   mailing:
     frontend:
-      activation-url: http://localhost:4200/activate-account?token=
+      activation-url: http://localhost:8080/activate-account
   file:
     upload:
       photos-output-path: uploads
+
+server:
+  port: 8088

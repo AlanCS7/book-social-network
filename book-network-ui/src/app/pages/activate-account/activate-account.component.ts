@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component } from '@angular/core';
+import { Router } from "@angular/router";
 import { AuthenticationService } from "../../services/services/authentication.service";
 
 @Component({
@@ -7,7 +7,7 @@ import { AuthenticationService } from "../../services/services/authentication.se
   templateUrl: './activate-account.component.html',
   styleUrls: ['./activate-account.component.scss']
 })
-export class ActivateAccountComponent implements OnInit {
+export class ActivateAccountComponent {
 
   message: string = '';
   isOkay: boolean = true;
@@ -15,16 +15,8 @@ export class ActivateAccountComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthenticationService,
-    private activatedRoute: ActivatedRoute
+    private authService: AuthenticationService
   ) {
-  }
-
-  ngOnInit(): void {
-    const token = this.activatedRoute.snapshot.queryParams['token'];
-    if (token) {
-      this.confirmAccount(token);
-    }
   }
 
   onCodeCompleted(token: string) {
