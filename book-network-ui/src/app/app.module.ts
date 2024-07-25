@@ -25,7 +25,7 @@ import { ApiModule } from "./services/api.module";
     HttpClientModule,
     FormsModule,
     CodeInputModule,
-    ApiModule.forRoot({ rootUrl: 'http://52.91.46.47:8088/api/v1' })
+    ApiModule.forRoot({ rootUrl: 'http://http://ec2-52-91-46-47.compute-1.amazonaws.com:8088/api/v1' })
   ],
   providers: [
     HttpClient,
