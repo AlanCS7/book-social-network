@@ -38,7 +38,7 @@ application:
     frontend:
       activation-url: http://localhost:8080/activate-account
   cors:
-    origins: http://localhost:4200,http://localhost:8080
+    origins: http://localhost:4200,http://localhost:8080,http://ec2-52-91-46-47.compute-1.amazonaws.com:8080
   file:
     upload:
       photos-output-path: uploads
